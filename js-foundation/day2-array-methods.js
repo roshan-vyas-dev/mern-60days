@@ -1,18 +1,13 @@
 // Day 2 - june 2
-
 // topic: map,filter,reduce
-
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // 1. map - every transform every item
-
 const doubled = numbers.map((num) => num * 2);
 console.log(doubled);
 
-
 // 2. FILTER - even numbers
-
 const evenNumbers = numbers.filter((num) => num % 2 == 0);
 console.log("Even Numbers", evenNumbers);
 
@@ -21,7 +16,6 @@ console.log("Even Numbers", evenNumbers);
 
 const total = numbers.reduce((sum, num) => sum + num, 0);
 console.log("Total Sum", total);
-
 
 // 4. Real example - array of students
 const students = [
@@ -39,12 +33,9 @@ console.log("Passed students:", passed);
 const passedNames = passed.map((student) => student.name);
 console.log("passed students:", passedNames);
 
-
 // Get average marks
-
 const averageMarks = students.reduce((sum, student) => sum + student.marks, 0) / students.length
 console.log("Average mark:", averageMarks);
-
 
 // 5. Chain all three together
 
