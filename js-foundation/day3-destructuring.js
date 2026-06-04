@@ -9,7 +9,6 @@ const user = {
     city: "Thrissur",
     job: "Developer"
 };
-
 // oldway
 const oldName = user.name
 const oldAge = user.age
@@ -17,7 +16,6 @@ const oldAge = user.age
 console.log(`my name is ${oldName}.I'm ${oldAge} year old`);
 
 // New way - destructuring
-
 const { name, age, city, job } = user;
 console.log(name, age, city, job);
 
@@ -33,7 +31,6 @@ console.log("Salary", salary);
 const colors = ["red", "green", "blue", "yellow"];
 
 const [first, second, third] = colors
-
 console.log(first, second, third);
 
 // Skip items
@@ -42,7 +39,6 @@ console.log("thirdColor", thirdColor);
 
 // 3. SPREAD OPERATOR
 // Merge two arrays
-
 const fruits = ["apple", "mango"];
 const veggies = ["carrot", "potato"];
 
@@ -62,7 +58,6 @@ const copy=[...original];
 copy.push(4);
 console.log("Orginal:",original);
 console.log("Copy:",copy);
-
 
 // 4. REST OPERATOR
 // Collect remaining items
