@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 6 - Dom</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>My Todo list</h1>
+
+        <div class="input-row">
+            <input type="text" id="todoInput" placeholder="Enter a task...">
+            <button onclick="addTodo()">Add</button>
+
+        </div>
+
+        <ul id="todoList"></ul>
+
+    </div>
+
+
+    <script>
+        // add todo
+        function addTodo() {
+            const input = document.getElementById("todoInput");
+            const list = document.getElementById("todoList");
+
+            // get value from input
+            const text = input.value.trim()
+
+
+            // if empty do nothing
+            if (text === "") {
+                alert("Please enter a Task");
+                return;
+            }
+
+
+            // create new list item
+            const li = document.createElement("li");
+
+            li.innerHTML = `
+          <span>${text}</span>
+          <button onclick="deleteTodo(this)">Delete</button>
+          `
+
+            //   add to list
+            list.appendChild(li);
+
+            // clear input
+            input.value = "";
+        }
+
+
+
+
+        // Delete todo
+        function deleteTodo(button) {
+            const li = button.parentElement;
+            li.remove();
+        }
+
+        // ADD on Enter key press
+        document.getElementById("todoInput").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                addTodo()
+            }
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>
