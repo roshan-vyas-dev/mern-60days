@@ -77,4 +77,5 @@ const Countdown = setInterval(()=>{
         clearInterval(Countdown)
         console.log("Times up");     
     } 
-},500)
+},500);
+
