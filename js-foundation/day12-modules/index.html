@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 12 - Modules</title>
+</head>
+
+<body>
+    <h1>Day 12 - ES6 Modules</h1>
+    <div id="output"></div>
+
+    <!-- type="module" is required for import/export to work -->
+    <script type="module">
+
+        // Import named exports - use exact names in {}
+        import { add, subtract, multiply, divide } from './math.js';
+
+        // Import default export - any name you want
+        import PI from './math.js';
+
+        // Import from greet.js
+        import { greetUser, greetMorning } from './greet.js';
+        import appName from './greet.js';
+
+        const output = document.getElementById("output");
+
+        // use imported functions
+        output.innerHTML = `
+            <p>Add: 10 + 5 = ${add(10, 5)}</p>
+            <p>Subtract: 10 - 5 = ${subtract(10, 5)}</p>
+            <p>Multiply: 10 * 5 = ${multiply(10, 5)}</p>
+            <p>Divide: 10 / 5 = ${divide(10, 5)}</p>
+            <p>PI = ${PI}</p>
+            <hr>
+            <p>${greetUser("Roshan")}</p>
+            <p>${greetMorning("Roshan")}</p>
+            <p>App: ${appName}</p>
+        `;
+
+    </script>
+</body>
+
+</html>
