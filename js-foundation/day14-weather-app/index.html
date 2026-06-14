@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 14 - Weather App</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+
+        <div class="input-row">
+            <input type="text" id="cityInput" placeholder="Enter city name...">
+            <button onclick="getWeather()">Search</button>
+
+        </div>
+
+        <div id="output"></div>
+
+    </div>
+
+    <script>
+        const output = document.getElementById("output");
+
+        async function getWeather() {
+            const cityInput = document.getElementById("cityInput");
+            const city = cityInput.value.trim();
+
+            output.innerHTML = "";
+
+            if (city === "") {
+                alert("Please enter a city name");
+                return;
+            }
+
+            output.innerHTML = "<p class='loading'>Searching...</p>";
+
+
+            try {
+                // Step 1 - convert city name to latitude/longitude
+
+                const geoResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`);
+
+                if (!geoResponse.ok) {
+                    throw new Error("Failed to find city");
+                }
+
+                const geoData = await geoResponse.json();
+
+                // check if city was found
+
+                if (!geoData.results || geoData.results.length === 0) {
+                    throw new Error("City not found, Try another name")
+                }
+
+                const place = geoData.results[0];
+                const lat = place.latitude;
+                const lon = place.longitude;
+                const placeName = place.name;
+                const country = place.country;
+
+
+                // Step 2 - get weather using latitude/longitude
+
+                const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+
+                if (!weatherResponse.ok) {
+                    throw new Error("Failed to fetch weather");
+                }
+
+                const weatherData = await weatherResponse.json();
+                const current = weatherData.current_weather;
+
+
+                // Step 3 - display result
+                output.innerHTML = `
+                    <div class="weather-card">
+
+                        <h2>${placeName}, ${country}</h2>
+                        <div class="temp">${current.temperature}°C</div>
+                        <p>Wind Speed: ${current.windspeed} km/h</p>
+                        <p>Wind Direction: ${current.winddirection}°</p>
+                        <p>Weather Code: ${current.weathercode}</p>
+                        <p class="time">Last updated: ${current.time}</p>
+                    </div>
+                `;
+
+
+            } catch (error) {
+                output.innerHTML = `<p class="error">Error: ${error.message}</p>`
+            }
+        }
+
+        // enter key support
+        document.getElementById("cityInput").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") getWeather();
+        })
+
+    </script>
+
+</body>
+
+</html>
