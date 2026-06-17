@@ -1,7 +1,9 @@
 import Counter from "./Counter";
+import PostList from "./PostList";
 import ProfileCard from "./ProfileCard";
 import SimpleForm from "./SimpleForm";
 import Toggle from "./Toggle";
+import UserList from "./UserList";
 
 
 
@@ -10,14 +12,15 @@ function App() {
 
   return (
     <div>
-      <h1>Day 15 - React Basics</h1>
-      <ProfileCard name="Roshan" role="MERN Developer" age={22} />
+      <h1>Day 17 - useEffect & Custom Hooks</h1>
 
 
-      <Counter/>
-      <SimpleForm/>
-      <Toggle/>
- 
+      <Counter />
+      <SimpleForm />
+      <Toggle />
+      <UserList />
+      <PostList />
+
 
     </div>
   );
