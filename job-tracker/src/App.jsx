@@ -1,29 +1,52 @@
-import Counter from "./Counter";
-import PostList from "./PostList";
-import ProfileCard from "./ProfileCard";
-import SimpleForm from "./SimpleForm";
-import Toggle from "./Toggle";
-import UserList from "./UserList";
-
-
-
+import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import Jobs from './pages/Jobs';
 
 function App() {
 
+  // fake authentication state for now
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
   return (
-    <div>
-      <h1>Day 17 - useEffect & Custom Hooks</h1>
+    <BrowserRouter>
+
+      <nav style={{ padding: "15px", background: "#4f46e5" }}>
+        <Link to="/" style={{ color: "white", marginRight: "15px" }}>Home</Link>
+        <Link to="/login" style={{ color: "white", marginRight: "15px" }}>Login</Link>
+        <Link to="/dashboard" style={{ color: "white", marginRight: "15px" }}>Dashboard</Link>
+        <Link to="/jobs" style={{ color: "white", marginRight: "15px" }}>Jobs</Link>
+
+        <button
+          onClick={() => setIsLoggedIn(!isLoggedIn)}
+          style={{ marginLeft: "20px" }}>
+          {isLoggedIn ? "Logout" : "Fake Login"}
+        </button>
+      </nav>
 
 
-      <Counter />
-      <SimpleForm />
-      <Toggle />
-      <UserList />
-      <PostList />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+
+        {/* Protected route - redirect to login if not authenticated */}
+        <Route
+          path="/dashboard"
+          element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/jobs"
+          element={isLoggedIn ? <Jobs /> : <Navigate to="/login" />}
+        />
+      </Routes>
 
 
-    </div>
-  );
+
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
