@@ -1,64 +1,101 @@
 const express = require("express");
 
 const router = express.Router();
-
-// fake jobs data for now
-
-let jobs = [
-    { id: 1, title: "Frontend Developer", company: "TechCorp", status: "Applied" },
-    { id: 2, title: "Backend Developer", company: "StartupXYZ", status: "Interview" },
-    { id: 3, title: "Full Stack Developer", company: "BigCompany", status: "Rejected" }
-];
+const Job = require("../models/job");
 
 
-// GET all
-router.get("/", (req, res) => {
-    res.json(jobs);
-})
 
-// get single job by id
+// get all jobs
 
-router.get("/:id", (req, res) => {
-    const job = jobs.find((j) => j.id === parseInt(req.params.id));
+router.get("/", async (req, res) => {
+    try {
+        const jobs = await Job.find();
+        res.json(jobs);
 
-    if(!jobs){
-           return res.status(404).json({ message: "Job not found!" });
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+
     }
 
-    res.json(job);
+})
+
+// GET single job by id
+
+router.get("/:id", async (req, res) => {
+    try {
+
+        const job = await Job.findById(req.params.id);
+
+        if (!job) {
+            return res.status(404).json({ message: "Job Not Found" })
+        }
+
+        res.json(job);
+
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
 })
 
 
 // POST - add new job
-router.post("/", (req, res) => {
-    const { title, company, status } = req.body;
 
-    if (!title || !company) {
-        return res.status(400).json({ message: "Title and company are required!" });
+router.post("/", async (req, res) => {
+    try {
+        const { title, company, status, notes } = req.body;
+
+        if (!title || !company) {
+            return res.status(400).json({ message: "Title and company required" })
+        }
+
+        const newJob = new Job({ title, company, status, notes });
+        const savedJob = await newJob.save();
+
+        res.status(201).json(savedJob)
+
+    } catch (err) {
+        res.status(500).json({ message: err.message })
     }
+})
 
-    const newJob = {
-        id: jobs.length + 1,
-        title,
-        company,
-        status: status || "Applied"
-    };
 
-    jobs.push(newJob);
-    res.status(201).json(newJob);
-});
+// PUT - update job
+
+router.put("/:id", async (req, res) => {
+    try {
+        const updatedJob = await Job.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        )
+
+        if (!updatedJob) {
+            res.status(404).json({ message: "Job not found" })
+        }
+
+        res.json(updatedJob)
+
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
+})
+
 
 // DELETE - remove job
-router.delete("/:id", (req, res) => {
-    const jobId = parseInt(req.params.id);
-    const jobExists = jobs.find((j) => j.id === jobId);
 
-    if (!jobExists) {
-        return res.status(404).json({ message: "Job not found!" });
+router.delete("/:id", async (req, res) => {
+    try {
+        const deletedJob=await Job.findByIdAndDelete(req.params.id);
+
+        if(!deletedJob){
+            return res.status(404).json({message:"Job not found"})
+        }
+
+        res.json({message:"Job deleted successfully"})
+
+    } catch (err) {
+        res.status(500).json({ message: err.message })
     }
-
-    jobs = jobs.filter((j) => j.id !== jobId);
-    res.json({ message: "Job deleted successfully!" });
-});
+})
 
 module.exports = router;
