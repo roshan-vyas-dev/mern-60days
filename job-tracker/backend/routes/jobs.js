@@ -2,12 +2,13 @@ const express = require("express");
 
 const router = express.Router();
 const Job = require("../models/job");
+const authMiddleware=require("../middleware/auth")
 
 
 
 // get all jobs
 
-router.get("/", async (req, res) => {
+router.get("/",authMiddleware, async (req, res) => {
     try {
         const jobs = await Job.find();
         res.json(jobs);
@@ -21,7 +22,7 @@ router.get("/", async (req, res) => {
 
 // GET single job by id
 
-router.get("/:id", async (req, res) => {
+router.get("/:id",authMiddleware, async (req, res) => {
     try {
 
         const job = await Job.findById(req.params.id);
@@ -40,7 +41,7 @@ router.get("/:id", async (req, res) => {
 
 // POST - add new job
 
-router.post("/", async (req, res) => {
+router.post("/",authMiddleware, async (req, res) => {
     try {
         const { title, company, status, notes } = req.body;
 
@@ -61,7 +62,7 @@ router.post("/", async (req, res) => {
 
 // PUT - update job
 
-router.put("/:id", async (req, res) => {
+router.put("/:id",authMiddleware, async (req, res) => {
     try {
         const updatedJob = await Job.findByIdAndUpdate(
             req.params.id,
@@ -83,7 +84,7 @@ router.put("/:id", async (req, res) => {
 
 // DELETE - remove job
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",authMiddleware, async (req, res) => {
     try {
         const deletedJob=await Job.findByIdAndDelete(req.params.id);
 

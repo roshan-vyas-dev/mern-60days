@@ -1,9 +1,11 @@
 require("dotenv").config()
 
 const express = require("express");
+const mongoose=require("mongoose");
+
 const app = express();
 const jobRoutes = require("./routes/jobs");
-const { default: mongoose } = require("mongoose");
+const authRoutes=require("./routes/auth");
 
 app.use(express.json());
 
@@ -20,7 +22,7 @@ app.get("/", (req, res) => {
     res.send("Job Tracker API is running");
 });
 
-// use job routes for any URL starting with /api/jobs
+app.use("/api/auth",authRoutes);
 app.use("/api/jobs", jobRoutes);
 
 app.listen(PORT, () => {
