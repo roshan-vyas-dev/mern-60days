@@ -2,11 +2,13 @@ require("dotenv").config()
 
 const express = require("express");
 const mongoose=require("mongoose");
+const cors=require("cors");
 
 const app = express();
 const jobRoutes = require("./routes/jobs");
 const authRoutes=require("./routes/auth");
 
+app.use(cors());  // allow frontend to call backend
 app.use(express.json());
 
 
