@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "https://job-tracker-api-0uud.onrender.com/api";
 
 // get token from localstorage
 
@@ -8,7 +8,7 @@ const getToken = () => localStorage.getItem("token");
 export const registerUser = async (userData) => {
     const response = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
-        headers: { "Content-Type": "appllication/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData)
 
     });

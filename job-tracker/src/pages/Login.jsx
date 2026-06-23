@@ -20,6 +20,7 @@ function Login() {
 
         try {
             const data = await loginUser({ email, password });
+              console.log("Login response:", data);
 
             if (data.token) {
                 // save token to localStorage
@@ -30,6 +31,7 @@ function Login() {
                 setError(data.message || "Login failed!");
             }
         } catch (err) {
+            console.log("Login error:", err);
             setError("Something went wrong!");
         }
 
