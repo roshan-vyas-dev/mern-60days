@@ -89,7 +89,11 @@ function Dashboard() {
                 </button>
             </div>
 
-            {loading ? <p>Loading jobs...</p> : (
+            {loading ? (
+                <div style={{ textAlign: "center", padding: "40px", color: "#4f46e5" }}>
+                    <p style={{ fontSize: "18px" }}>Loading your jobs...</p>
+                </div>
+            ) : (
                 <div>
                     <h3>Your Jobs ({jobs.length})</h3>
                     {jobs.length === 0 && <p>No jobs yet. Add one above!</p>}
