@@ -1,35 +1,49 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { createNote, getAllNotes, deleteNote as deleteNoteApi } from './api/notesApi'
+import Login from "./Login";
+
 
 function App() {
 
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
-  const addNote = () => {
+  if (!isLoggedIn) {
+    return <Login onLogin={() => setIsLoggedIn(true)} />;
+}
+
+  const addNote = async () => {
     if (!title || !content) {
       alert("Please fill both fields");
       return;
     }
 
-    const newNote = {
-      id: Date.now(),
-      title: title,
-      content: content
-    }
+    const savedNote = await createNote({ title, content })
 
-    setNotes([...notes, newNote])
+    setNotes([...notes, savedNote])
 
     setTitle("");
     setContent("");
   }
 
-  const deleteNote = (id) => {
+  const deleteNote = async (id) => {
 
-    setNotes(notes.filter(note => note.id !== id));
+    await deleteNoteApi(id);
+
+    setNotes(notes.filter(note => note._id !== id));
 
 
   }
+
+  useEffect(() => {
+    async function fetchNotes() {
+      const data = await getAllNotes();
+      setNotes(Array.isArray(data) ? data : []);
+    }
+    fetchNotes();
+  }, []);
 
   return (
     <div>
@@ -42,10 +56,10 @@ function App() {
 
       {notes.map((note) =>
 
-        <div key={note.id} >
+        <div key={note._id} >
           <p>{note.title}</p>
           <p>{note.content}</p>
-          <button onClick={() => deleteNote(note.id)}>delete</button>
+          <button onClick={() => deleteNote(note._id)}>delete</button>
 
         </div>
 
