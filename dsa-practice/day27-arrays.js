@@ -1,64 +1,56 @@
 // Day 27 - DSA Arrays
 // Problem 1: Find largest number in array
 
-// const numbers = [3, 7, 1, 9, 4, 6, 2];
+const numbers = [3, 7, 1, 9, 4, 6, 2];
 
-// let largest=numbers[0];
+let largest=numbers[0];
 
-// for(let i=0;i<numbers.length;i++){
-//     if(numbers[i]>largest){
-//         largest=numbers[i]
-//     }
-// }
+for(let i=0;i<numbers.length;i++){
+    if(numbers[i]>largest){
+        largest=numbers[i]
+    }
+}
 
-// console.log(`largest number is ${largest}`);
-
-
+console.log(`largest number is ${largest}`);
 
 // find smallest number
-// const numbers = [3, 7, 1, 9, 4, 6, 2];
+const numbersArray = [3, 7, 1, 9, 4, 6, 2];
 
-// let smallest = numbers[0];
+let smallest = numbersArray[0];
 
-// for (let i = 0; i < numbers.length; i++) {
-//     if (numbers[i] < smallest) {
-//         smallest = numbers[i]
-//     }
+for (let i = 0; i < numbersArray.length; i++) {
+    if (numbersArray[i] < smallest) {
+        smallest = numbersArray[i]
+    }
 
-// }
+}
 
-// console.log(`smallest number is ${smallest}`);
+console.log(`smallest number is ${smallest}`);
 
 
 
 // reverse it without using .reverse() method
-// const fruits = ["apple", "mango", "banana", "orange"];
+const fruits = ["apple", "mango", "banana", "orange"];
 
-// let reverse = []
+let reversedArray = []
 
-// for (let i = fruits.length - 1; i >= 0; i--) {
-//     reverse.push(fruits[i])
-// }
+for (let i = fruits.length - 1; i >= 0; i--) {
+    reversedArray.push(fruits[i])
+}
 
-// console.log(reverse);
+console.log(`Reversed array: ${reversedArray}`);
 
 
 
 // check if it is a palindrome
-// const word = "racecar";
-// let reverse = "";
+const word = "racecar";
+let reversedWord = ""
 
-// for (let i = word.length - 1; i >= 0; i--) {
-//     reverse = reverse + word[i]
-// }
+for (let i = word.length - 1; i >= 0; i--) {
+    reversedWord = reversedWord+ word[i]
+}
 
-// if(word===reverse){
-//     console.log("palindrome");
-    
-// }else{
-//     console.log("not a palidrome");
-    
-// }
+console.log(`${word} is ${word === reversedWord ? "a palindrome" : "not a palindrome"}`);
 
 
 
@@ -75,7 +67,6 @@ for(let i=0;i<sentence.length;i++){
     }
 }
 
-console.log(vowelCount);
-
+console.log(`Number of vowels in "${sentence}": ${vowelCount}`);
 
 
