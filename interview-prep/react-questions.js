@@ -51,4 +51,4 @@
 // If logged in → show the page
 // How I implemented in Job Tracker:
 // const isLoggedIn = !!localStorage.getItem("token")
-// isLoggedIn ? <Dashboard /> : <Navigate to="/login" />
+// isLoggedIn ? <Dashboard /> : <Navigate to="/login" />x`
