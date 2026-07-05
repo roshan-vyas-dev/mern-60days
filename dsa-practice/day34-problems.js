@@ -11,6 +11,7 @@ for(let i=0;i<arr.length;i++){
 }
 
 console.log(result);
+// result = [ 1, 2, 3, 4, 5 ]
 
 
 // Check if two strings are anagrams
@@ -29,6 +30,8 @@ if(sorted1===sorted2){
     console.log("not an anagram");
     
 }
+
+// result=these are anagrams
 
 
 
