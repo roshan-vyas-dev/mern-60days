@@ -47,12 +47,12 @@ const sentence = "my name is roshan";
 let words = sentence.split(" ");
 
 for (let i = 0; i < words.length; i++) {
-    words[i]=words[i].charAt(0).toUpperCase() +words[i].slice(1);
+    words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
 
 
 }
 
-let output =words.join(" ");
+let output = words.join(" ");
 console.log(output);
 // output: "My Name Is Roshan"
 
@@ -61,21 +61,20 @@ console.log(output);
 // Count occurrences of each word
 const sentences = "the cat sat on the mat the cat";
 
-let word=sentences.split(" ");
+let word = sentences.split(" ");
 
-let obj={};
+let obj = {};
 
-for(let i=0;i<word.length;i++){
-    if(obj[word[i]]){
+for (let i = 0; i < word.length; i++) {
+    if (obj[word[i]]) {
         obj[word[i]]++
 
-    }else{
-        obj[word[i]]=1
+    } else {
+        obj[word[i]] = 1
     }
 }
 
 console.log(obj);
-
 
 
 // output: { the: 3, cat: 2, sat: 1, on: 1, mat: 1 }
@@ -84,21 +83,21 @@ console.log(obj);
 // find the first character that appears only once
 const str = "swiss";
 
-let objs={};
+let objs = {};
 
-for(let i=0;i<str.length;i++){
-    if(objs[str[i]]){
+for (let i = 0; i < str.length; i++) {
+    if (objs[str[i]]) {
         objs[str[i]]++
-    }else{
-        objs[str[i]]=1
+    } else {
+        objs[str[i]] = 1
     }
 }
 
-for(let key in objs){
-    if(objs[key]===1){
+for (let key in objs) {
+    if (objs[key] === 1) {
         console.log(key);
         break;
-        
+
     }
 }
 
@@ -108,13 +107,13 @@ for(let key in objs){
 
 const sentencess = "I love JavaScript";
 
-let wordss=sentencess.split(" ");
+let wordss = sentencess.split(" ");
 
-let reverse=[]
+let reverse = []
 
 
-for(let i=wordss.length-1;i>=0;i--){
- reverse.push(wordss[i])
+for (let i = wordss.length - 1; i >= 0; i--) {
+    reverse.push(wordss[i])
 
 }
 
