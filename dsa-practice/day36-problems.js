@@ -13,8 +13,8 @@ function isSorted(arr) {
     return true;
 }
 
-console.log(isSorted([1, 2, 3, 4, 5])); //  print true
-console.log(isSorted([1, 3, 2, 4, 5])); // print false
+console.log(isSorted([1, 2, 3, 4, 5])); //   true
+console.log(isSorted([1, 3, 2, 4, 5])); //  false
 
 
 // Problem 2: Find the missing number in an array
@@ -37,11 +37,8 @@ let obj = {};
 let common = [];
 
 for (let i = 0; i < arr3.length; i++) {
-
     obj[arr3[i]] = true
-
 }
-
 for (let i = 0; i < arr4.length; i++) {
     if (obj[arr4[i]]) {
         common.push(arr4[i]);
@@ -50,7 +47,6 @@ for (let i = 0; i < arr4.length; i++) {
 
 console.log(common);
 // output: [3, 4]
-
 
 // Problem 4: Flatten a nested array
 const arr = [1, [2, 3], 4, [5, 6]];
@@ -61,14 +57,10 @@ for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr[i].length; j++) {
             result.push(arr[i][j])
         }
-
     } else {
         result.push(arr[i])
-
-
     }
 }
-
 console.log(result);
 // output: [1, 2, 3, 4, 5, 6]
 
